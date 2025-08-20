@@ -1,7 +1,8 @@
+import { useEffect, useState } from "react";
 import { millify } from "millify";
+import { Link } from "react-router";
 
 import { useGetCryptosQuery } from "../services/cryptoapi";
-import { useEffect, useState } from "react";
 
 const Cryptocurrencies = ({ simplified }: { simplified: boolean }) => {
   const { data, isFetching } = useGetCryptosQuery();
@@ -34,8 +35,8 @@ const Cryptocurrencies = ({ simplified }: { simplified: boolean }) => {
         />
       )}
       {dataToDisplay?.map((coin) => (
-        <a
-          href={`/crypto/${coin.uuid}`}
+        <Link
+          to={`/crypto/${coin.uuid}`}
           key={coin.uuid}
           className="bg-white border rounded-2xl shadow hover:shadow-lg transition p-6 flex flex-col items-center text-center"
         >
@@ -53,7 +54,7 @@ const Cryptocurrencies = ({ simplified }: { simplified: boolean }) => {
               {millify(+coin.marketCap)}
             </span>
           </p>
-        </a>
+        </Link>
       ))}
 
       {dataToDisplay?.length === 0 && (
